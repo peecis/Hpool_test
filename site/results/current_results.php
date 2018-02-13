@@ -96,7 +96,7 @@ foreach($algos as $item)
 	
 	echo "</tr>";
 	
-// ---------------------------------- coin code here ---------------------------------
+/* ---------------------------------- coin code here ---------------------------------
 	$list = getdbolist('db_coins', "enable and visible and algo=:algo order by index_avg desc", array(':algo'=>$item));
 	$worker = getdbocount('db_workers', "algo=:algo", array(':algo'=>$item));
 	foreach($list as $coin)
@@ -115,7 +115,7 @@ foreach($algos as $item)
 		echo "<td></td>";
 		echo "</tr>;
 	}
-// --------------------------------- end of coin list --------------------------------
+// --------------------------------- end of coin list -------------------------------- */
 
 	$total_coins += $coins;
 	$total_miners += $workers;
