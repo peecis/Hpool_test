@@ -106,14 +106,14 @@ foreach($algos as $item)
 		//$coin_workers = getdbocount('db_workers', "algo=:algo", array(':algo'=>$item));
 		//$pool_hash = yaamp_coin_rate($coin->id);
 		//$pool_hash = $pool_hash? Itoa2($pool_hash).'h/s': '';
-		echo "<tr>";
-		echo "<td></td>";
-		echo "<td></td>";
-		echo "<td></td>";
-		echo "<td></td>";
-		echo "<td></td>";
-		echo "<td></td>";
-		echo "</tr>;
+	//	echo "<tr>";
+	//	echo "<td></td>";
+	//	echo "<td></td>";
+	//	echo "<td></td>";
+	//	echo "<td></td>";
+	//	echo "<td></td>";
+	//	echo "<td></td>";
+	//	echo "</tr>;
 	//}
 // --------------------------------- end of coin list -------------------------------- 
 
