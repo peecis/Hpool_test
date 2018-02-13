@@ -18,11 +18,7 @@ echo <<<END
 <th data-sorter="numeric" align="right">Coins</th>
 <th data-sorter="numeric" align="right">Miners</th>
 <th data-sorter="numeric" align="right">Hashrate</th>
-<th data-sorter="currency" align="right">Fees**</th>
-<th data-sorter="currency" class="estimate" align="right">Current<br>Estimate</th>
-<!--<th data-sorter="currency" >Norm</th>-->
-<th data-sorter="currency" class="estimate" align="right">24 Hours<br>Estimated</th>
-<th data-sorter="currency"align="right">24 Hours<br>Actual***</th>
+<th data-sorter="currency" align="right">Fees</th>
 </tr>
 </thead>
 END;
@@ -134,7 +130,7 @@ echo "<td></td>";
 echo "<td align=right style='font-size: .8em;'>$total_coins</td>";
 echo "<td align=right style='font-size: .8em;'>$total_miners</td>";
 echo "<td></td>";
-
+echo "<td></td>";
 echo "</tr>";
 echo "</table>";
 echo '<p style="font-size: .8em;">&nbsp;* values in mBTC/MH/day, per GH for sha & blake algos</p>';
