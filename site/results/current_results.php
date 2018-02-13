@@ -134,10 +134,7 @@ echo "<td></td>";
 echo "<td align=right style='font-size: .8em;'>$total_coins</td>";
 echo "<td align=right style='font-size: .8em;'>$total_miners</td>";
 echo "<td></td>";
-echo "<td></td>";
-echo '<td class="estimate"></td>';
-echo '<td class="estimate"></td>';
-echo "<td></td>";
+
 echo "</tr>";
 echo "</table>";
 echo '<p style="font-size: .8em;">&nbsp;* values in mBTC/MH/day, per GH for sha & blake algos</p>';
