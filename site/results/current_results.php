@@ -96,26 +96,26 @@ foreach($algos as $item)
 	
 	echo "</tr>";
 	
-/* ---------------------------------- coin code here ---------------------------------
+// ---------------------------------- coin code here ---------------------------------
 	$list = getdbolist('db_coins', "enable and visible and algo=:algo order by index_avg desc", array(':algo'=>$item));
 	$worker = getdbocount('db_workers', "algo=:algo", array(':algo'=>$item));
 	foreach($list as $coin)
 	{
-		$name = substr($coin->name, 0, 12);
-		$individual_port = getdbo('db_coins', $coin["symbol2"]);
+		//$name = substr($coin->name, 0, 12);
+		//$individual_port = getdbo('db_coins', $coin["symbol2"]);
 		//$coin_workers = getdbocount('db_workers', "algo=:algo", array(':algo'=>$item));
-		$pool_hash = yaamp_coin_rate($coin->id);
-		$pool_hash = $pool_hash? Itoa2($pool_hash).'h/s': '';
+		//$pool_hash = yaamp_coin_rate($coin->id);
+		//$pool_hash = $pool_hash? Itoa2($pool_hash).'h/s': '';
 		echo "<tr>";
-		echo "<td align=right style='font-size: .8em;'><b><i>$name</i></b></td>";
-		echo "<td align=right style='font-size: .8em;'>$individual_port</td>";
+		echo "<td align=right style='font-size: .8em;'></td>";
+		echo "<td align=right style='font-size: .8em;'></td>";
 		echo "<td></td>";
 		echo "<td></td>"; // seit pec tam ievietot mineru skaitu
-		echo "<td align=right style='font-size: .8em;'>$pool_hash</td>";
+		echo "<td align=right style='font-size: .8em;'></td>";
 		echo "<td></td>";
 		echo "</tr>;
 	}
-// --------------------------------- end of coin list -------------------------------- */
+// --------------------------------- end of coin list -------------------------------- 
 
 	$total_coins += $coins;
 	$total_miners += $workers;
