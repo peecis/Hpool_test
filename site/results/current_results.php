@@ -105,12 +105,12 @@ foreach($algos as $item)
 	foreach($list as $coin)
 	{
 		$name = substr($coin->name, 0, 12);
-		//$individual_port = $coin->symbol2;
+		$individual_port = getdbo('db_coins', $coin["symbol2"]);
 		//$coin_workers = getdbocount('db_workers', "algo=:algo", array(':algo'=>$item));
 		$pool_hash = yaamp_coin_rate($coin->id);
 		$pool_hash = $pool_hash? Itoa2($pool_hash).'h/s': '';
 		echo "<tr>";
-		echo "<td align=right style='font-size: .8em;'><b>$name</b></td>";
+		echo "<td align=right style='font-size: .8em;'><b><i>$name</i></b></td>";
 		echo "<td align=right style='font-size: .8em;'>$individual_port</td>";
 		echo "<td></td>";
 		echo "<td></td>"; // seit pec tam ievietot mineru skaitu
