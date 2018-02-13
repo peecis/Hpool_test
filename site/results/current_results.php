@@ -15,11 +15,7 @@ echo "<th align=right>Port</th>";
 echo "<th align=right>Coins</th>";
 echo "<th align=right>Miners</th>";
 echo "<th align=right>Hashrate</th>";
-echo "<th align=right>Fees**</th>";
-echo "<th align=right>Current<br>Estimate</th>";
-//echo "<th>Norm</th>";
-echo "<th align=right>24 Hours<br>Estimated</th>";
-echo "<th align=right>24 Hours<br>Actual</th>";
+echo "<th align=right>Fees</th>";
 echo "</tr>";
 echo "</thead>";
 
@@ -61,7 +57,7 @@ foreach($algos as $item)
 {
 	$norm = $item[0];
 	$algo = $item[1];
-
+	
 	$coins = getdbocount('db_coins', "enable and visible and auto_ready and algo=:algo", array(':algo'=>$algo));
 	$count = getdbocount('db_workers', "algo=:algo", array(':algo'=>$algo));
 
@@ -87,12 +83,6 @@ foreach($algos as $item)
 	$hashrate1 = controller()->memcache->get_database_scalar("current_hashrate1-$algo",
 		"select avg(hashrate) from hashrate where time>$t and algo=:algo", array(':algo'=>$algo));
 
-//	$btcmhday1 = $hashrate1 != 0? mbitcoinvaluetoa($total1 / $hashrate1 * 1000000 * 1000): '-';
-	if($algo == 'sha256')
-		$btcmhday1 = $hashrate1 != 0? mbitcoinvaluetoa($total1 / $hashrate1 * 1000000 * 1000000): '';
-	else
-		$btcmhday1 = $hashrate1 != 0? mbitcoinvaluetoa($total1 / $hashrate1 * 1000000 * 1000): '';
-
 	$fees = yaamp_fee($algo);
 	$port = getAlgoPort($algo);
 
@@ -107,18 +97,29 @@ foreach($algos as $item)
 	echo "<td align=right style='font-size: .8em;'>$count</td>";
 	echo "<td align=right style='font-size: .8em;'>$hashrate</td>";
 	echo "<td align=right style='font-size: .8em;'>{$fees}%</td>";
-
-	if($algo == $best_algo)
-		echo "<td align=right style='font-size: .8em;' title='normalized $norm'><b>$price*</b></td>";
-	else if($norm>0)
-		echo "<td align=right style='font-size: .8em;' title='normalized $norm'><b>$price</b></td>";
-	else
-		echo "<td align=right style='font-size: .8em;'><b>$price</b></td>";
-
-	echo "<td align=right style='font-size: .8em;'>$avgprice</td>";
-	echo "<td align=right style='font-size: .8em;'>$btcmhday1</td>";
 	echo "</tr>";
-
+	
+// ---------------------------------- coin code here ---------------------------------
+	$list = getdbolist('db_coins', "enable and visible and algo=:algo order by index_avg desc", array(':algo'=>$item));
+	$worker = getdbocount('db_workers', "algo=:algo", array(':algo'=>$item));
+	foreach($list as $coin)
+	{
+		$name = substr($coin->name, 0, 12);
+		//$individual_port = $coin->symbol2;
+		//$coin_workers = getdbocount('db_workers', "algo=:algo", array(':algo'=>$item));
+		$pool_hash = yaamp_coin_rate($coin->id);
+		$pool_hash = $pool_hash? Itoa2($pool_hash).'h/s': '';
+		echo "<tr>";
+		echo "<td align=right style='font-size: .8em;'><b>$name</b></td>";
+		echo "<td align=right style='font-size: .8em;'>$individual_port</td>";
+		echo "<td></td>";
+		echo "<td></td>"; // seit pec tam ievietot mineru skaitu
+		echo "<td align=right style='font-size: .8em;'>$pool_hash</td>";
+		echo "<td></td>";
+		echo "</tr>;
+	}
+// --------------------------------- end of coin list --------------------------------
+	
 	$total_coins += $coins;
 	$total_miners += $count;
 }
@@ -134,8 +135,6 @@ echo "<td><b>all</b></td>";
 echo "<td></td>";
 echo "<td align=right style='font-size: .8em;'>$total_coins</td>";
 echo "<td align=right style='font-size: .8em;'>$total_miners</td>";
-echo "<td></td>";
-echo "<td></td>";
 echo "<td></td>";
 echo "<td></td>";
 echo "<td></td>";
