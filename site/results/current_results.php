@@ -54,12 +54,12 @@ foreach($algos as $item)
 	$algo = $item[1];
 	$coinsym = '';
 	$coins = getdbocount('db_coins', "enable and visible and auto_ready and algo=:algo", array(':algo'=>$algo));
-	if ($coins == 1) {
-		// If we only mine one coin, show it...
-		$coin = getdbosql('db_coins', "enable and visible and auto_ready and algo=:algo", array(':algo'=>$algo));
-		$coinsym = $coin->symbol;
-		$coinsym = '<span title="'.$coin->name.'">'.$coinsym.'</a>';
-	}
+	//if ($coins == 1) {
+	//	// If we only mine one coin, show it...
+	//	$coin = getdbosql('db_coins', "enable and visible and auto_ready and algo=:algo", array(':algo'=>$algo));
+	//	$coinsym = $coin->symbol;
+	//	$coinsym = '<span title="'.$coin->name.'">'.$coinsym.'</a>';
+	//}
 	if (!$coins) continue;
 	$workers = getdbocount('db_workers', "algo=:algo", array(':algo'=>$algo));
 	$hashrate = controller()->memcache->get_database_scalar("current_hashrate-$algo",
@@ -89,7 +89,7 @@ foreach($algos as $item)
 		echo "<tr style='cursor: pointer' class='ssrow' onclick='javascript:select_algo(\"$algo\")'>";
 	echo "<td><b>$algo</b></td>";
 	echo "<td align=right style='font-size: .8em;'>$port</td>";
-	echo "<td align=right style='font-size: .8em;'>".($coins==1 ? $coinsym : $coins)."</td>";
+	echo "<td align=right style='font-size: .8em;'></td>";
 	echo "<td align=right style='font-size: .8em;'>$workers</td>";
 	echo '<td align="right" style="font-size: .8em;" data="'.$hashrate.'">'.$hashrate_sfx.'</td>';
 	echo "<td align=right style='font-size: .8em;'>{$fees}%</td>";
@@ -98,26 +98,23 @@ foreach($algos as $item)
 	
 	// ---------------------------------- coin code here ---------------------------------
 
-	if($coins > 1)
+	$coin_list = getdbolist('db_coins', "enable and visible and auto_ready and algo=:algo", array(':algo'=>$algo));
+	foreach($coin_list as $dinero)
 	{
-		$coin_list = getdbolist('db_coins', "enable and visible and auto_ready and algo=:algo", array(':algo'=>$algo));
-		foreach($coin_list as $dinero)
-		{
-			$coin_name = $dinero->symbol;
-			$coin_port = $dinero->symbol2;
-			
-			$pool_hash = yaamp_coin_rate($dinero->id);
-			$coin_hash = $pool_hash? Itoa2($pool_hash).'h/s': '';
-			
-			echo "<tr>";
-			echo "<td align=right>$coin_name</td>";
-			echo "<td align=right style='font-size: .8em;'>$coin_port</td>";
-			echo "<td align=right style='font-size: .8em;'></td>";
-			echo "<td align=right style='font-size: .8em;'></td>";
-			echo "<td align=right style='font-size: .8em;'>$coin_hash</td>";
-			echo "<td align=right style='font-size: .8em;'></td>";
-			echo "</tr><br />";
-		}
+		$coin_name = $dinero->symbol;
+		$coin_port = $dinero->symbol2;
+
+		$pool_hash = yaamp_coin_rate($dinero->id);
+		$coin_hash = $pool_hash? Itoa2($pool_hash).'h/s': '';
+
+		echo "<tr>";
+		echo "<td align=right>$coin_name</td>";
+		echo "<td align=right style='font-size: .8em;'>$coin_port</td>";
+		echo "<td align=right style='font-size: .8em;'></td>";
+		echo "<td align=right style='font-size: .8em;'></td>";
+		echo "<td align=right style='font-size: .8em;'>$coin_hash</td>";
+		echo "<td align=right style='font-size: .8em;'></td>";
+		echo "</tr><br />";
 	}
 	
 	// --------------------------------- end of coin list -------------------------------- 
