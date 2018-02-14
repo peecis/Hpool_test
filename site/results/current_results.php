@@ -108,16 +108,20 @@ foreach($algos as $item)
 		//$pool_hash = $pool_hash? Itoa2($pool_hash).'h/s': '';
 	//foreach($coin as $coin)
 	//{
+	if($coins > 1)
+	{
+		for($i = 0;$i < $coins;$i++)
+		{
 			echo "<tr>";
 			echo "<td>Coin</td>";
-			echo "<td>1</td>";
+			echo "<td>".$coin[$i]."</td>";
 			echo "<td>2</td>";
 			echo "<td>3</td>";
 			echo "<td>4</td>";
 			echo "<td>5</td>";
 			echo "</tr><br />";
-		//}
-	//}
+		}
+	}
 // --------------------------------- end of coin list -------------------------------- 
 
 	$total_coins += $coins;
