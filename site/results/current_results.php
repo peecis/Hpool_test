@@ -59,6 +59,18 @@ foreach($algos as $item)
 		$coin = getdbosql('db_coins', "enable and visible and auto_ready and algo=:algo", array(':algo'=>$algo));
 		$coinsym = empty($coin->symbol2) ? $coin->symbol : $coin->symbol2;
 		$coinsym = '<span title="'.$coin->name.'">'.$coinsym.'</a>';
+	} else {
+		for($my_coin = 1;$my_coin < 5;$my_coin++)
+		{
+			echo "<tr>";
+			echo "<td>Coin</td>";
+			echo "<td>$my_coin</td>";
+			echo "<td></td>";
+			echo "<td></td>";
+			echo "<td></td>";
+			echo "<td></td>";
+			echo "</tr><br />";
+		}
 	}
 	if (!$coins) continue;
 	$workers = getdbocount('db_workers', "algo=:algo", array(':algo'=>$algo));
@@ -97,7 +109,7 @@ foreach($algos as $item)
 	echo "</tr>";
 	
 // ---------------------------------- coin code here ---------------------------------
-	//$list = getdbolist('db_coins', "enable and visible and algo=:algo order by index_avg desc", array(':algo'=>$item));
+	//$list = getdbolist('db_coins', "enable and visible", array(':algo'=>$item));
 	//$worker = getdbocount('db_workers', "algo=:algo", array(':algo'=>$item));
 	//foreach($list as $coin)
 	//{
@@ -106,15 +118,7 @@ foreach($algos as $item)
 		//$coin_workers = getdbocount('db_workers', "algo=:algo", array(':algo'=>$item));
 		//$pool_hash = yaamp_coin_rate($coin->id);
 		//$pool_hash = $pool_hash? Itoa2($pool_hash).'h/s': '';
-	echo "<tr style='cursor: pointer; background-color: #e0d3e8>";
-	echo "<td></td>";
-	echo "<td></td>";
-	echo "<td></td>";
-	echo "<td></td>";
-	echo "<td></td>";
-	echo "<td></td>";
-	echo "</tr>;
-	//}
+	
 // --------------------------------- end of coin list -------------------------------- 
 
 	$total_coins += $coins;
