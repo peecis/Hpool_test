@@ -106,6 +106,8 @@ foreach($algos as $item)
 			$coin_name = $dinero->symbol;
 			$coin_port = $dinero->symbol2;
 			
+			$coin_hash = $pool_hash? Itoa2($pool_hash).'h/s': '';
+			$pool_hash = yaamp_coin_rate($coin->id)
 			echo "<tr>";
 			echo "<td align=right>$coin_name</td>";
 			echo "<td align=right style='font-size: .8em;'>$coin_port</td>";
