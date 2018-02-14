@@ -113,7 +113,7 @@ foreach($algos as $item)
 		$coin_list = getdbolist('db_coins', "enable and visible and auto_ready and algo=:algo", array(':algo'=>$algo));
 		foreach($coin_list as $dinero
 		{
-			$coin_name = $dinero->symbol2;
+			//$coin_name = $dinero->symbol2;
 			
 			echo "<tr>";
 			echo "<td align=right>Coin</td>";
