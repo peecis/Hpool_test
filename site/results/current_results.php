@@ -57,14 +57,14 @@ foreach($algos as $item)
 	if ($coins == 1) {
 		// If we only mine one coin, show it...
 		$coin = getdbosql('db_coins', "enable and visible and auto_ready and algo=:algo", array(':algo'=>$algo));
-		$coinsym = empty($coin->symbol2) ? $coin->symbol : $coin->symbol2;
+		$coinsym = $coin->symbol;
 		$coinsym = '<span title="'.$coin->name.'">'.$coinsym.'</a>';
 	} else {
-		for($my_coin = 1;$my_coin < 5;$my_coin++)
+		foreach($coin as $coin)
 		{
 			echo "<tr>";
 			echo "<td>Coin</td>";
-			echo "<td>$my_coin</td>";
+			echo "<td>$coin</td>";
 			echo "<td></td>";
 			echo "<td></td>";
 			echo "<td></td>";
