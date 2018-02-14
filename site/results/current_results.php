@@ -110,11 +110,11 @@ foreach($algos as $item)
 	//{
 	if($coins > 1)
 	{
-		for($i = 0;$i < $coins;$i++)
+		foreach($coin as $coin)
 		{
 			echo "<tr>";
-			echo "<td>Coin</td>";
-			echo "<td align=right style='font-size: .8em;'>Port</td>";
+			echo "<td align=right>$coin->name</td>";
+			echo "<td align=right style='font-size: .8em;'>$coin->symbol2</td>";
 			echo "<td align=right style='font-size: .8em;'>2</td>";
 			echo "<td align=right style='font-size: .8em;'>3</td>";
 			echo "<td align=right style='font-size: .8em;'>4</td>";
