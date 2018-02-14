@@ -114,7 +114,7 @@ foreach($algos as $item)
 			echo "<td align=right style='font-size: .8em;'>$coin_port</td>";
 			echo "<td align=right style='font-size: .8em;'></td>";
 			echo "<td align=right style='font-size: .8em;'></td>";
-			echo "<td align=right style='font-size: .8em;'>$coin_hash</td>";
+			echo "<td align=right style='font-size: .8em;'>coin_hash</td>";
 			echo "<td align=right style='font-size: .8em;'></td>";
 			echo "</tr><br />";
 		}
