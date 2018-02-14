@@ -60,17 +60,17 @@ foreach($algos as $item)
 		$coinsym = $coin->symbol;
 		$coinsym = '<span title="'.$coin->name.'">'.$coinsym.'</a>';
 	} else {
-		foreach($coin as $coin)
-		{
+		//foreach($coin as $coin)
+		//{
 			echo "<tr>";
 			echo "<td>Coin</td>";
-			echo "<td>$coin</td>";
-			echo "<td></td>";
-			echo "<td></td>";
-			echo "<td></td>";
-			echo "<td></td>";
+			echo "<td>1</td>";
+			echo "<td>2</td>";
+			echo "<td>3</td>";
+			echo "<td>4</td>";
+			echo "<td>5</td>";
 			echo "</tr><br />";
-		}
+		//}
 	}
 	if (!$coins) continue;
 	$workers = getdbocount('db_workers', "algo=:algo", array(':algo'=>$algo));
