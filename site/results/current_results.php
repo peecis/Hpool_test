@@ -113,9 +113,11 @@ foreach($algos as $item)
 		$coin_list = getdbosql('db_coins', "enable and visible and auto_ready and algo=:algo", array(':algo'=>$algo));
 		for($c = 0;$c < $coins;$c++)
 		{
+			$coin_name = $coin_list[$c]->symbol2;
+			
 			echo "<tr>";
 			echo "<td align=right>Coin</td>";
-			echo "<td align=right style='font-size: .8em;'>1</td>";
+			echo "<td align=right style='font-size: .8em;'>$coin_name</td>";
 			echo "<td align=right style='font-size: .8em;'>2</td>";
 			echo "<td align=right style='font-size: .8em;'>3</td>";
 			echo "<td align=right style='font-size: .8em;'>4</td>";
