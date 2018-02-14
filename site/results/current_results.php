@@ -94,7 +94,7 @@ foreach($algos as $item)
 	echo '<td align="right" style="font-size: .8em;" data="'.$hashrate.'">'.$hashrate_sfx.'</td>';
 	echo "<td align=right style='font-size: .8em;'>{$fees}%</td>";
 	
-	echo "</tr>";
+	echo "</tr><br />";
 	
 	// ---------------------------------- coin code here ---------------------------------
 	//$list = getdbolist('db_coins', "enable and visible", array(':algo'=>$item));
@@ -112,14 +112,14 @@ foreach($algos as $item)
 	//{
 		//for($i = 0;$i < $coins;$i++)
 		//{
-			echo "<tr>";
-			echo "<td>Coin</td>";
-			echo "<td>".$coin[$i]."</td>";
-			echo "<td>2</td>";
-			echo "<td>3</td>";
-			echo "<td>4</td>";
-			echo "<td>5</td>";
-			echo "</tr><br />";
+	echo "<tr>";
+	echo "<td>Coin</td>";
+	echo "<td align=right style='font-size: .8em;'>Port</td>";
+	echo "<td align=right style='font-size: .8em;'>2</td>";
+	echo "<td align=right style='font-size: .8em;'>3</td>";
+	echo "<td align=right style='font-size: .8em;'>4</td>";
+	echo "<td align=right style='font-size: .8em;'>5</td>";
+	echo "</tr><br />";
 		//}
 	//}
 	// --------------------------------- end of coin list -------------------------------- 
