@@ -111,7 +111,7 @@ foreach($algos as $item)
 	if($coins > 1)
 	{
 		$coin_list = getdbolist('db_coins', "enable and visible and auto_ready and algo=:algo", array(':algo'=>$algo));
-		foreach($coin_list as $dinero
+		foreach($coin_list as $dinero)
 		{
 			//$coin_name = $dinero->symbol2;
 			
