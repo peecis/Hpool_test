@@ -108,20 +108,20 @@ foreach($algos as $item)
 		//$pool_hash = $pool_hash? Itoa2($pool_hash).'h/s': '';
 	//foreach($coin as $coin)
 	//{
-	//if($coins > 1)
-	//{
-		//for($i = 0;$i < $coins;$i++)
-		//{
-	echo "<tr>";
-	echo "<td>Coin</td>";
-	echo "<td align=right style='font-size: .8em;'>Port</td>";
-	echo "<td align=right style='font-size: .8em;'>2</td>";
-	echo "<td align=right style='font-size: .8em;'>3</td>";
-	echo "<td align=right style='font-size: .8em;'>4</td>";
-	echo "<td align=right style='font-size: .8em;'>5</td>";
-	echo "</tr><br />";
-		//}
-	//}
+	if($coins > 1)
+	{
+		for($i = 0;$i < $coins;$i++)
+		{
+			echo "<tr>";
+			echo "<td>Coin</td>";
+			echo "<td align=right style='font-size: .8em;'>Port</td>";
+			echo "<td align=right style='font-size: .8em;'>2</td>";
+			echo "<td align=right style='font-size: .8em;'>3</td>";
+			echo "<td align=right style='font-size: .8em;'>4</td>";
+			echo "<td align=right style='font-size: .8em;'>5</td>";
+			echo "</tr><br />";
+		}
+	}
 	// --------------------------------- end of coin list -------------------------------- 
 
 	$total_coins += $coins;
