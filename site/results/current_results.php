@@ -110,10 +110,10 @@ foreach($algos as $item)
 	//{
 	if($coins > 1)
 	{
-		$coin_list = getdbosql('db_coins', "enable and visible and auto_ready and algo=:algo", array(':algo'=>$algo));
-		for($c = 0;$c < $coins;$c++)
+		$coin_list = getdbolist('db_coins', "enable and visible and auto_ready and algo=:algo", array(':algo'=>$algo));
+		foreach($coin_list as $dinero
 		{
-			$coin_name = $coin_list[$c]->symbol2;
+			$coin_name = $dinero->symbol2;
 			
 			echo "<tr>";
 			echo "<td align=right>Coin</td>";
