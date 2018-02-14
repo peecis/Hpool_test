@@ -96,7 +96,7 @@ foreach($algos as $item)
 	
 	echo "</tr>";
 	
-// ---------------------------------- coin code here ---------------------------------
+	// ---------------------------------- coin code here ---------------------------------
 	//$list = getdbolist('db_coins', "enable and visible", array(':algo'=>$item));
 	//$worker = getdbocount('db_workers', "algo=:algo", array(':algo'=>$item));
 	//foreach($list as $coin)
@@ -108,10 +108,10 @@ foreach($algos as $item)
 		//$pool_hash = $pool_hash? Itoa2($pool_hash).'h/s': '';
 	//foreach($coin as $coin)
 	//{
-	if($coins > 1)
-	{
-		for($i = 0;$i < $coins;$i++)
-		{
+	//if($coins > 1)
+	//{
+		//for($i = 0;$i < $coins;$i++)
+		//{
 			echo "<tr>";
 			echo "<td>Coin</td>";
 			echo "<td>".$coin[$i]."</td>";
@@ -120,9 +120,9 @@ foreach($algos as $item)
 			echo "<td>4</td>";
 			echo "<td>5</td>";
 			echo "</tr><br />";
-		}
-	}
-// --------------------------------- end of coin list -------------------------------- 
+		//}
+	//}
+	// --------------------------------- end of coin list -------------------------------- 
 
 	$total_coins += $coins;
 	$total_miners += $workers;
