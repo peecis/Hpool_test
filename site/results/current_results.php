@@ -97,34 +97,26 @@ foreach($algos as $item)
 	echo "</tr>";
 	
 	// ---------------------------------- coin code here ---------------------------------
-	//$list = getdbolist('db_coins', "enable and visible", array(':algo'=>$item));
-	//$worker = getdbocount('db_workers', "algo=:algo", array(':algo'=>$item));
-	//foreach($list as $coin)
-	//{
-		//$name = substr($coin->name, 0, 12);
-		//$individual_port = getdbo('db_coins', $coin["symbol2"]);
-		//$coin_workers = getdbocount('db_workers', "algo=:algo", array(':algo'=>$item));
-		//$pool_hash = yaamp_coin_rate($coin->id);
-		//$pool_hash = $pool_hash? Itoa2($pool_hash).'h/s': '';
-	//foreach($coin as $coin)
-	//{
+
 	if($coins > 1)
 	{
 		$coin_list = getdbolist('db_coins', "enable and visible and auto_ready and algo=:algo", array(':algo'=>$algo));
 		foreach($coin_list as $dinero)
 		{
 			$coin_name = $dinero->symbol;
+			$coin_port = $dinero->symbol2;
 			
 			echo "<tr>";
 			echo "<td align=right>$coin_name</td>";
-			echo "<td align=right style='font-size: .8em;'>1</td>";
-			echo "<td align=right style='font-size: .8em;'>2</td>";
-			echo "<td align=right style='font-size: .8em;'>3</td>";
-			echo "<td align=right style='font-size: .8em;'>4</td>";
-			echo "<td align=right style='font-size: .8em;'>5</td>";
+			echo "<td align=right style='font-size: .8em;'>$coin_port</td>";
+			echo "<td align=right style='font-size: .8em;'></td>";
+			echo "<td align=right style='font-size: .8em;'></td>";
+			echo "<td align=right style='font-size: .8em;'>hashrate</td>";
+			echo "<td align=right style='font-size: .8em;'></td>";
 			echo "</tr><br />";
 		}
 	}
+	
 	// --------------------------------- end of coin list -------------------------------- 
 
 	$total_coins += $coins;
