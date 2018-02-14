@@ -94,7 +94,7 @@ foreach($algos as $item)
 	echo '<td align="right" style="font-size: .8em;" data="'.$hashrate.'">'.$hashrate_sfx.'</td>';
 	echo "<td align=right style='font-size: .8em;'>{$fees}%</td>";
 	
-	echo "</tr><br />";
+	echo "</tr>";
 	
 	// ---------------------------------- coin code here ---------------------------------
 	//$list = getdbolist('db_coins', "enable and visible", array(':algo'=>$item));
@@ -111,7 +111,7 @@ foreach($algos as $item)
 	if($coins > 1)
 	{
 		$coin_list = getdbosql('db_coins', "enable and visible and auto_ready and algo=:algo", array(':algo'=>$algo));
-		foreach($coin_list as $coin)
+		for($c = 0;$c < $coins;$c++)
 		{
 			echo "<tr>";
 			echo "<td align=right>Coin</td>";
