@@ -61,22 +61,22 @@ foreach($algos as $item)
 	$hashrate = controller()->memcache->get_database_scalar("current_hashrate-$algo",
 		"select hashrate from hashrate where algo=:algo order by time desc limit 1", array(':algo'=>$algo));
 	$hashrate_sfx = $hashrate? Itoa2($hashrate).'h/s': '-';
-	//$price = controller()->memcache->get_database_scalar("current_price-$algo",
-	//	"select price from hashrate where algo=:algo order by time desc limit 1", array(':algo'=>$algo));
-	//$price = $price? mbitcoinvaluetoa(take_yaamp_fee($price, $algo)): '-';
-	//$norm = mbitcoinvaluetoa($norm);
-	//$t = time() - 24*60*60;
-	//$avgprice = controller()->memcache->get_database_scalar("current_avgprice-$algo",
-	//	"select avg(price) from hashrate where algo=:algo and time>$t", array(':algo'=>$algo));
-	//$avgprice = $avgprice? mbitcoinvaluetoa(take_yaamp_fee($avgprice, $algo)): '-';
-	//$total1 = controller()->memcache->get_database_scalar("current_total-$algo",
-	//	"SELECT SUM(amount*price) AS total FROM blocks WHERE time>$t AND algo=:algo AND NOT category IN ('orphan','stake','generated')",
-	//	array(':algo'=>$algo)
-	//);
-	//$hashrate1 = controller()->memcache->get_database_scalar("current_hashrate1-$algo",
-	//	"select avg(hashrate) from hashrate where time>$t and algo=:algo", array(':algo'=>$algo));
-	//$algo_unit_factor = yaamp_algo_mBTC_factor($algo);
-	//$btcmhday1 = $hashrate1 != 0? mbitcoinvaluetoa($total1 / $hashrate1 * 1000000 * 1000 * $algo_unit_factor): '';
+	$price = controller()->memcache->get_database_scalar("current_price-$algo",
+		"select price from hashrate where algo=:algo order by time desc limit 1", array(':algo'=>$algo));
+	$price = $price? mbitcoinvaluetoa(take_yaamp_fee($price, $algo)): '-';
+	$norm = mbitcoinvaluetoa($norm);
+	$t = time() - 24*60*60;
+	$avgprice = controller()->memcache->get_database_scalar("current_avgprice-$algo",
+		"select avg(price) from hashrate where algo=:algo and time>$t", array(':algo'=>$algo));
+	$avgprice = $avgprice? mbitcoinvaluetoa(take_yaamp_fee($avgprice, $algo)): '-';
+	$total1 = controller()->memcache->get_database_scalar("current_total-$algo",
+		"SELECT SUM(amount*price) AS total FROM blocks WHERE time>$t AND algo=:algo AND NOT category IN ('orphan','stake','generated')",
+		array(':algo'=>$algo)
+	);
+	$hashrate1 = controller()->memcache->get_database_scalar("current_hashrate1-$algo",
+		"select avg(hashrate) from hashrate where time>$t and algo=:algo", array(':algo'=>$algo));
+	$algo_unit_factor = yaamp_algo_mBTC_factor($algo);
+	$btcmhday1 = $hashrate1 != 0? mbitcoinvaluetoa($total1 / $hashrate1 * 1000000 * 1000 * $algo_unit_factor): '';
 	$fees = yaamp_fee($algo);
 	$port = getAlgoPort($algo);
 	if($defaultalgo == $algo)
