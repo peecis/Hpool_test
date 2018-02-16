@@ -14,6 +14,7 @@ echo <<<END
 <thead>
 <tr>
 <th>Algo</th>
+<th></th>
 <th data-sorter="numeric" align="right">Port</th>
 <th data-sorter="numeric" align="right">Coins</th>
 <th data-sorter="numeric" align="right">Miners</th>
@@ -82,6 +83,7 @@ foreach($algos as $item)
 	else
 		echo "<tr style='cursor: pointer' class='ssrow' onclick='javascript:select_algo(\"$algo\")'>";
 	echo "<td><b>$algo</b></td>";
+	echo "<td></td>";
 	echo "<td align=right style='font-size: .8em;'></td>";
 	echo "<td align=right style='font-size: .8em;'></td>";
 	echo "<td align=right style='font-size: .8em;'>$workers</td>";
@@ -123,6 +125,7 @@ if($defaultalgo == 'all')
 else
 	echo "<tr style='cursor: pointer' class='ssrow' onclick='javascript:select_algo(\"all\")'>";
 echo "<td><b>all</b></td>";
+echo "<td></td>";
 echo "<td></td>";
 echo "<td align=right style='font-size: .8em;'>$total_coins</td>";
 echo "<td align=right style='font-size: .8em;'>$total_miners</td>";
