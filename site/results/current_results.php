@@ -119,7 +119,7 @@ foreach($algos as $item)
 	$total_coins += $coins;
 	$total_miners += $workers;
 }
-echo "</tbody>";
+//echo "</tbody>";
 if($defaultalgo == 'all')
 	echo "<tr style='cursor: pointer; background-color: #e0d3e8;' onclick='javascript:select_algo(\"all\")'>";
 else
@@ -134,6 +134,9 @@ echo "<td></td>";
 echo "</tr>";
 echo "</table>";
 echo "</div></div><br>";
+//------------
+echo "</tbody>";
+//--------------
 ?>
 
 <?php if (!$showestimates): ?>
