@@ -83,7 +83,7 @@ foreach($algos as $item)
 	else
 		echo "<tr style='cursor: pointer' class='ssrow' onclick='javascript:select_algo(\"$algo\")'>";
 	echo "<td><b>$algo</b></td>";
-	echo "<td></td>";
+	echo "<td width=18></td>";
 	echo "<td align=right style='font-size: .8em;'></td>";
 	echo "<td align=right style='font-size: .8em;'></td>";
 	echo "<td align=right style='font-size: .8em;'>$workers</td>";
@@ -104,8 +104,8 @@ foreach($algos as $item)
 		$coin_hash = $pool_hash? Itoa2($pool_hash).'h/s': '';
 
 		echo "<tr>";
-		echo "<td width=18><img width=16 src='$dinero->image'></td>";
 		echo "<td align=right>$coin_name</td>";
+		echo "<td width=18><img width=16 src='$dinero->image'></td>";
 		echo "<td align=right style='font-size: .8em;'>$coin_port</td>";
 		echo "<td align=right style='font-size: .8em;'></td>";
 		echo "<td align=right style='font-size: .8em;'></td>";
