@@ -104,7 +104,7 @@ foreach($algos as $item)
 		$coin_hash = $pool_hash? Itoa2($pool_hash).'h/s': '';
 
 		echo "<tr>";
-		echo "<td align=right>$coin_name</td>";
+		echo "<td align=center>$coin_name</td>";
 		echo "<td width=18><img width=16 src='$dinero->image'></td>";
 		echo "<td align=right style='font-size: .8em;'>$coin_port</td>";
 		echo "<td align=right style='font-size: .8em;'></td>";
