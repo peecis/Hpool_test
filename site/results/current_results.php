@@ -57,6 +57,7 @@ foreach($algos as $item)
 	if (!$coins) continue;
 	
 	$workers = getdbocount('db_workers', "algo=:algo", array(':algo'=>$algo));
+	
 	$hashrate = controller()->memcache->get_database_scalar("current_hashrate-$algo",
 		"select hashrate from hashrate where algo=:algo order by time desc limit 1", array(':algo'=>$algo));
 	$hashrate_sfx = $hashrate? Itoa2($hashrate).'h/s': '-';
@@ -97,17 +98,15 @@ foreach($algos as $item)
 	$coin_list = getdbolist('db_coins', "enable and visible and auto_ready and algo=:algo", array(':algo'=>$algo));
 	foreach($coin_list as $dinero)
 	{
-		$coin_name = $dinero->symbol;
-		$coin_port = $dinero->symbol2;
 
 		$pool_hash = yaamp_coin_rate($dinero->id);
 		$coin_hash = $pool_hash? Itoa2($pool_hash).'h/s': '';
 
 		echo "<tr>";
-		echo "<td align=center>$coin_name</td>";
+		echo "<td align=center>$dinero->name</td>";
 		echo "<td width=18><img width=16 src='$dinero->image'></td>";
-		echo "<td align=right style='font-size: .8em;'>$coin_port</td>";
-		echo "<td align=right style='font-size: .8em;'></td>";
+		echo "<td align=right style='font-size: .8em;'>$dinero->symbol2</td>";
+		echo "<td align=right style='font-size: .8em;'>$dinero->symbol</td>";
 		echo "<td align=right style='font-size: .8em;'></td>";
 		echo "<td align=right style='font-size: .8em;'>$coin_hash</td>";
 		echo "<td align=right style='font-size: .8em;'></td>";
