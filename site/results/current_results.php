@@ -18,7 +18,9 @@ echo <<<END
 <th data-sorter="numeric" align="right">Port</th>
 <th data-sorter="numeric" align="right">Coins</th>
 <th data-sorter="numeric" align="right">Miners</th>
-<th data-sorter="numeric" align="right">Hashrate</th>
+<th data-sorter="numeric" align="right">Pool Hash</th>
+<th data-sorter="numeric" align="right">Net Hash</th>
+<th data-sorter="numeric" align="right">Luck*</th>
 <th data-sorter="currency" align="right">Fees</th>
 </tr>
 </thead>
@@ -61,34 +63,22 @@ foreach($algos as $item)
 	$hashrate = controller()->memcache->get_database_scalar("current_hashrate-$algo",
 		"select hashrate from hashrate where algo=:algo order by time desc limit 1", array(':algo'=>$algo));
 	$hashrate_sfx = $hashrate? Itoa2($hashrate).'h/s': '-';
-	//$price = controller()->memcache->get_database_scalar("current_price-$algo",
-	//	"select price from hashrate where algo=:algo order by time desc limit 1", array(':algo'=>$algo));
-	//$price = $price? mbitcoinvaluetoa(take_yaamp_fee($price, $algo)): '-';
-	//$norm = mbitcoinvaluetoa($norm);
-	//$t = time() - 24*60*60;
-	//$avgprice = controller()->memcache->get_database_scalar("current_avgprice-$algo",
-	//	"select avg(price) from hashrate where algo=:algo and time>$t", array(':algo'=>$algo));
-	//$avgprice = $avgprice? mbitcoinvaluetoa(take_yaamp_fee($avgprice, $algo)): '-';
-	//$total1 = controller()->memcache->get_database_scalar("current_total-$algo",
-	//	"SELECT SUM(amount*price) AS total FROM blocks WHERE time>$t AND algo=:algo AND NOT category IN ('orphan','stake','generated')",
-	//	array(':algo'=>$algo)
-	//);
-	//$hashrate1 = controller()->memcache->get_database_scalar("current_hashrate1-$algo",
-	//	"select avg(hashrate) from hashrate where time>$t and algo=:algo", array(':algo'=>$algo));
-	//$algo_unit_factor = yaamp_algo_mBTC_factor($algo);
-	//$btcmhday1 = $hashrate1 != 0? mbitcoinvaluetoa($total1 / $hashrate1 * 1000000 * 1000 * $algo_unit_factor): '';
 	$fees = yaamp_fee($algo);
 	$port = getAlgoPort($algo);
+	
 	if($defaultalgo == $algo)
 		echo "<tr style='cursor: pointer; background-color: #e0d3e8;' onclick='javascript:select_algo(\"$algo\")'>";
 	else
 		echo "<tr style='cursor: pointer' class='ssrow' onclick='javascript:select_algo(\"$algo\")'>";
+	
 	echo "<td><b>$algo</b></td>";
 	echo "<td width=18></td>";
 	echo "<td align=right style='font-size: .8em;'></td>";
 	echo "<td align=right style='font-size: .8em;'>$coins</td>";
 	echo "<td align=right style='font-size: .8em;'>$workers</td>";
 	echo '<td align="right" style="font-size: .8em;" data="'.$hashrate.'">'.$hashrate_sfx.'</td>';
+	echo "<td></td>";
+	echo "<td></td>";
 	echo "<td align=right style='font-size: .8em;'>{$fees}%</td>";
 	
 	echo "</tr>";
@@ -99,13 +89,23 @@ foreach($algos as $item)
 	{
 		$pool_hash = yaamp_coin_rate($dinero->id);
 		$coin_hash = $pool_hash? Itoa2($pool_hash).'h/s': '';
+		$h = $dinero->block_height-100;
+		$ss1 = dboscalar("SELECT count(*) FROM blocks WHERE coin_id={$coin->id} AND height>=$h AND category!='orphan'");
+		$pool_luck = $ss1? $ss1.'%': '';
+		
+		$min_ttf = $dinero->network_ttf>0? min($dinero->actual_ttf, $dinero->network_ttf): $dinero->actual_ttf;
+		$network_hash = $dinero->difficulty * 0x100000000 / ($min_ttf? $min_ttf: 60);
+		$network_hash = $network_hash? 'network hash '.Itoa2($network_hash).'h/s': '';
+				
 		echo "<tr>";
-		echo "<td align=center>$dinero->name</td>";
 		echo "<td width=18><img width=16 src='$dinero->image'></td>";
+		echo "<td align=center>$dinero->name</td>";
 		echo "<td align=right style='font-size: .8em;'>$dinero->symbol2</td>";
 		echo "<td align=right style='font-size: .8em;'>$dinero->symbol</td>";
 		echo "<td align=right style='font-size: .8em;'></td>";
 		echo "<td align=right style='font-size: .8em;'>$coin_hash</td>";
+		echo "<td align=right style='font-size: .8em;'>$network_hash</td>";
+		echo "<td align=right style='font-size: .8em;'>$pool_luck</td>";
 		echo "<td align=right style='font-size: .8em;'></td>";
 		echo "</tr>";
 	}
@@ -126,8 +126,12 @@ echo "<td align=right style='font-size: .8em;'>$total_coins</td>";
 echo "<td align=right style='font-size: .8em;'>$total_miners</td>";
 echo "<td></td>";
 echo "<td></td>";
+echo "<td></td>";
+echo "<td></td>";
 echo "</tr>";
 echo "</table>";
+
+echo '<p style="font-size: .8em;">&nbsp;* Pool % of last 100 net blocks</p>';
 echo "</div></div><br>";
 ?>
 
